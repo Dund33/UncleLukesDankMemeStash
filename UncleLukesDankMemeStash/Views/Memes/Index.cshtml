@@ -28,9 +28,5 @@
     {
          @await Html.PartialAsync("_Tile", tileViewModel);
     }
-    <div class="col-5 col-sm-3 col-lg-2 gallery-item fade-in">
-        <a class="text-decoration-none" asp-action="Create">
-            <img class="img-responsive" style="object-fit:scale-down; width: 90%" src="~/add.svg" />
-        </a>
-    </div>
+    @await Html.PartialAsync("_AddButton"); 
 </div>

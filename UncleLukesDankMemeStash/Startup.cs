@@ -34,7 +34,8 @@ namespace UncleLukesDankMemeStash
             services.AddDefaultIdentity<MemeAuthor>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Home/Denied";
