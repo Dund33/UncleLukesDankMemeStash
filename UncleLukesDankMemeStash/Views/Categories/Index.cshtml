@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TileViewModel>
+
+@{
+    ViewData["Title"] = "Kategorie";
+}
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/BrowseEnter.js"></script>
+    <link rel="stylesheet" src="~/css/site.css" />
+</head>
+
+
+<h1 class="text-white">Kategorie</h1>
+
+<div class="row">
+
+    @foreach (var tileViewModel in Model)
+    {
+        @await Html.PartialAsync("_Tile", tileViewModel);
+    }
+
+    @if (ViewBag.CanAdd)
+    {
+        <div class="col-5 col-sm-3 col-lg-2">
+            <div>
+                <a class="text-center text-decoration-none link-padding rounded" asp-action="Create">
+                    <div>Dodaj</div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+

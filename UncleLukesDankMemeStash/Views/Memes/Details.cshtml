@@ -1,0 +1,43 @@
+﻿@model UncleLukesDankMemeStash.Models.Meme
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<h1>Szczegóły</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <img class="img-fluid" src="@Model.ImageURL" />
+    <hr />
+    <dl class="row text-white">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> |
+    <a asp-action="Index">Wróć do listy</a>
+</div>

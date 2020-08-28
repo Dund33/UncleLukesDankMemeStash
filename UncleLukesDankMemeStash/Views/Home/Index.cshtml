@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/HomeIndexEnter.js"></script>
+
+<div class="container">
+    <ul class="list-group text-center">
+
+        @if (ViewBag.User == null)
+        {
+            <a class="text-decoration-none" style="color: inherit" asp-action="Login">
+                <li class="list-group-item btn-dark link" style="display: none">
+                    Zaloguj
+                </li>
+            </a>
+            <a class="text-decoration-none" style="color: inherit" asp-action="Register">
+                <li class="list-group-item btn-dark link" style="display: none">
+                    Zarejestruj
+                </li>
+            </a>
+        }
+
+        <a class="text-decoration-none" style="color: inherit" asp-controller="Memes" asp-action="Index">
+            <li class="list-group-item btn-dark link" style="display: none">
+                Przeglądaj memy
+            </li>
+        </a>
+
+        <a class="text-decoration-none" style="color: inherit" asp-controller="Categories" asp-action="Index">
+            <li class="list-group-item btn-dark link" style="display: none">
+
+                Przeglądaj kategoriami
+            </li>
+        </a>
+
+
+        @if (ViewBag.User != null)
+        {
+            <a class="text-decoration-none" style="color: inherit" asp-controller="Memes" asp-action="Create">
+                <li class="list-group-item btn-dark link" style="display: none">
+                    Dodaj mema
+                </li>
+            </a>
+        }
+
+    </ul>
+</div>
