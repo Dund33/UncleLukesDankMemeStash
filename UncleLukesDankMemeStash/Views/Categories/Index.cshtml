@@ -17,7 +17,7 @@
 
     @foreach (var tileViewModel in Model)
     {
-        @await Html.PartialAsync("_Tile", tileViewModel);
+        @await Html.PartialAsync("_EditDeleteTile", tileViewModel);
     }
 
     @if (ViewBag.CanAdd)

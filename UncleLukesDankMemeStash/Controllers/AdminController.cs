@@ -48,9 +48,32 @@ namespace UncleLukesDankMemeStash.Controllers
                 return View("NotAnAdmin");
             }
 
-            IEnumerable<MemeAuthor> users = await _context.Users.Where(user => user.EmailConfirmed == false).ToListAsync();
+            IEnumerable<MemeAuthor> users = _context.Users
+                .Where(user => user.EmailConfirmed == false);
 
             return View(users);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Confirm(string userID)
+        {
+            MemeAuthor user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (!user.Admin)
+            {
+                return View("NotAnAdmin");
+            }
+
+            if (userID == null)
+                return NotFound("Invalid ID");
+
+            var matchingUser = await _context.Users
+                .Where(user => user.Id == userID)
+                .SingleAsync();
+            matchingUser.EmailConfirmed = true;
+            _context.SaveChanges();
+            return View("NonConfirmedUsers");
         }
     }
 }

@@ -13,14 +13,7 @@
 <div class="row">
     @foreach (var user in Model)
     {
-        <div class="rounded d-flex flex-column col-5 col-sm-3 col-lg-2 fade-in gallery-item justify-content-center">
-            <div>@user.FirstName @user.LastName</div>
-            <a asp-action="Confirm" asp-route-userID="@user.Id">
-                <div class="btn-dark d-flex flex-column fade-in">
-                    confirm
-                </div>
-            </a>
-        </div>
+        @await Html.PartialAsync("_ConfirmTile", user);
     }
 </div>
 
