@@ -6,16 +6,14 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/BrowseEnter.js"></script>
-    <link rel="stylesheet" src="~/css/site.css" />
+    <link rel="stylesheet" src="~/css/site.css"/>
 </head>
 
 
 <div class="row">
     @foreach (var user in Model)
     {
-        @await Html.PartialAsync("_ConfirmTile", user);
+        @await Html.PartialAsync("_ConfirmTile", user)
+        ;
     }
 </div>
-
-
-

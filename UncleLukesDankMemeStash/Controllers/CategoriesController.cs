@@ -16,7 +16,8 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
-        public CategoriesController(ApplicationDbContext context, SignInManager<MemeAuthor> loginManager, UserManager<MemeAuthor> userManager)
+        public CategoriesController(ApplicationDbContext context, SignInManager<MemeAuthor> loginManager,
+            UserManager<MemeAuthor> userManager)
         {
             _context = context;
             _loginManager = loginManager;
@@ -33,7 +34,7 @@ namespace UncleLukesDankMemeStash.Controllers
             var tileViewModels = categories.Select(category => new TileViewModel
             {
                 Displayable = category,
-                CanEdit = (user?.Admin ?? false),
+                CanEdit = user?.Admin ?? false
             });
 
             return View(tileViewModels);
@@ -42,33 +43,23 @@ namespace UncleLukesDankMemeStash.Controllers
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
+
+            if (category == null) return NotFound();
 
             return View(category);
         }
 
         // GET: Categories/Create
         [Authorize]
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
-            {
-                return View("NotAnAdmin");
-            }
-
-            return View();
+            return !user.Admin ? View("NotAnAdmin") : View();
         }
 
         // POST: Categories/Create
@@ -77,45 +68,33 @@ namespace UncleLukesDankMemeStash.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("ID,Title,Description,ImageURL")] Category category)
+        public async Task<IActionResult> Create([Bind("ID,Title,Description,ImageURL")]
+            Category category)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
-            {
-                return View("NotAnAdmin");
-            }
+            if (!user.Admin) return View("NotAnAdmin");
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            if (!ModelState.IsValid)
+                return View(category);
+
+            _context.Add(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Categories/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
-            {
-                return View("NotAnAdmin");
-            }
+            if (!user.Admin) return View("NotAnAdmin");
 
             var category = await _context.Category.FindAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
+            if (category == null) return NotFound();
 
             return View(category);
         }
@@ -126,41 +105,30 @@ namespace UncleLukesDankMemeStash.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,ImageURL")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,ImageURL")]
+            Category category)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
+            if (!user.Admin) return View("NotAnAdmin");
+
+            if (id != category.ID) return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(category);
+
+            try
             {
-                return View("NotAnAdmin");
+                _context.Update(category);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CategoryExists(category.ID)) return NotFound();
+                throw;
             }
 
-            if (id != category.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Categories/Delete/5
@@ -169,42 +137,33 @@ namespace UncleLukesDankMemeStash.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
-            {
-                return View("NotAnAdmin");
-            }
+            if (!user.Admin) return View("NotAnAdmin");
 
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
+
+            if (category == null) return NotFound();
 
             return View(category);
         }
 
         // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (!user.Admin)
-            {
-                return View("NotAnAdmin");
-            }
+            if (!user.Admin) return View("NotAnAdmin");
 
             var category = await _context.Category.FindAsync(id);
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

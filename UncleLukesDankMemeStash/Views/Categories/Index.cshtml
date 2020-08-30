@@ -7,7 +7,7 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/BrowseEnter.js"></script>
-    <link rel="stylesheet" src="~/css/site.css" />
+    <link rel="stylesheet" src="~/css/site.css"/>
 </head>
 
 
@@ -17,13 +17,14 @@
 
     @foreach (var tileViewModel in Model)
     {
-        @await Html.PartialAsync("_EditDeleteTile", tileViewModel);
+        @await Html.PartialAsync("_EditDeleteTile", tileViewModel)
+        ;
     }
 
     @if (ViewBag.CanAdd)
     {
-        @await Html.PartialAsync("_AddButton");
+        @await Html.PartialAsync("_AddButton")
+        ;
     }
 
 </div>
-

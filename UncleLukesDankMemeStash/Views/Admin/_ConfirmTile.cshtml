@@ -1,16 +1,16 @@
 ﻿@model UncleLukesDankMemeStash.Areas.Identity.MemeAuthor
 
 <head>
-    <link rel="stylesheet" src="~/css/site.css" />
-    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" src="~/css/site.css"/>
+    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css"/>
 </head>
 
 <body>
-    <div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between fade-in">
-            <h6 class="text-center text-white">@Model.FirstName @Model.LastName</h6>
-       
-            <div class="justify-content-center d-flex">
-                <a class="text-center text-decoration-none link-padding rounded" asp-action="Edit" asp-route-id="@Model.Id">Confirm</a>
-            </div>
+<div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between fade-in">
+    <h6 class="text-center text-white">@Model.FirstName @Model.LastName</h6>
+
+    <div class="justify-content-center d-flex">
+        <a class="text-center text-decoration-none link-padding rounded" asp-action="Edit" asp-route-id="@Model.Id">Confirm</a>
     </div>
+</div>
 </body>

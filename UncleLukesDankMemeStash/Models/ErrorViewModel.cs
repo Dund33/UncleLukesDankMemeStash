@@ -1,5 +1,3 @@
-using System;
-
 namespace UncleLukesDankMemeStash.Models
 {
     public class ErrorViewModel

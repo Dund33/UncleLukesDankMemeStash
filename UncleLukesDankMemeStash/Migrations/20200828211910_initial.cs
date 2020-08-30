@@ -8,22 +8,19 @@ namespace UncleLukesDankMemeStash.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
+                "AspNetRoles",
+                table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_AspNetRoles", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
+                "AspNetUsers",
+                table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
@@ -44,14 +41,11 @@ namespace UncleLukesDankMemeStash.Migrations
                     LastName = table.Column<string>(nullable: false),
                     Admin = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_AspNetUsers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
+                "Category",
+                table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
@@ -59,14 +53,11 @@ namespace UncleLukesDankMemeStash.Migrations
                     Description = table.Column<string>(nullable: true),
                     ImageURL = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Category", x => x.ID); });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
+                "AspNetRoleClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
@@ -78,16 +69,16 @@ namespace UncleLukesDankMemeStash.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        x => x.RoleId,
+                        "AspNetRoles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
+                "AspNetUserClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
@@ -99,16 +90,16 @@ namespace UncleLukesDankMemeStash.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
+                "AspNetUserLogins",
+                table => new
                 {
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
@@ -117,42 +108,42 @@ namespace UncleLukesDankMemeStash.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
+                "AspNetUserRoles",
+                table => new
                 {
                     UserId = table.Column<string>(nullable: false),
                     RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        x => x.RoleId,
+                        "AspNetRoles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
+                "AspNetUserTokens",
+                table => new
                 {
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
@@ -161,18 +152,18 @@ namespace UncleLukesDankMemeStash.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Memes",
-                columns: table => new
+                "Memes",
+                table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
@@ -186,95 +177,95 @@ namespace UncleLukesDankMemeStash.Migrations
                 {
                     table.PrimaryKey("PK_Memes", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Memes_Category_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Category",
-                        principalColumn: "ID",
+                        "FK_Memes_Category_CategoryID",
+                        x => x.CategoryID,
+                        "Category",
+                        "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Memes_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_Memes_AspNetUsers_UserID",
+                        x => x.UserID,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
+                "IX_AspNetRoleClaims_RoleId",
+                "AspNetRoleClaims",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
+                "RoleNameIndex",
+                "AspNetRoles",
+                "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
+                "IX_AspNetUserClaims_UserId",
+                "AspNetUserClaims",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
+                "IX_AspNetUserLogins_UserId",
+                "AspNetUserLogins",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
+                "IX_AspNetUserRoles_RoleId",
+                "AspNetUserRoles",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
+                "EmailIndex",
+                "AspNetUsers",
+                "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
+                "UserNameIndex",
+                "AspNetUsers",
+                "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Memes_CategoryID",
-                table: "Memes",
-                column: "CategoryID");
+                "IX_Memes_CategoryID",
+                "Memes",
+                "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Memes_UserID",
-                table: "Memes",
-                column: "UserID");
+                "IX_Memes_UserID",
+                "Memes",
+                "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                "AspNetUserClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                "AspNetUserLogins");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                "AspNetUserRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Memes");
+                "Memes");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                "Category");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                "AspNetUsers");
         }
     }
 }

@@ -7,16 +7,16 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/BrowseEnter.js"></script>
-    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" src="~/css/site.css" />
+    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" src="~/css/site.css"/>
 </head>
 
 <div class="navbar container-fluid d-flex">
     <div class="col-6 col-lg-8 col-xl-8 text-right text-white">Szukaj po nazwie</div>
     <div class="col-6 col-lg-4 col-xl-4">
         <form method="get" asp-action="Search">
-            <input name="query" id="query" type="text" />
-            <input type="submit" value="Szukaj" />
+            <input name="query" id="query" type="text"/>
+            <input type="submit" value="Szukaj"/>
         </form>
     </div>
 </div>
@@ -26,7 +26,8 @@
 <div class="row">
     @foreach (var tileViewModel in Model)
     {
-         @await Html.PartialAsync("_EditDeleteTile", tileViewModel);
+        @await Html.PartialAsync("_EditDeleteTile", tileViewModel)
+        ;
     }
-    @await Html.PartialAsync("_AddButton"); 
+    @await Html.PartialAsync("_AddButton");
 </div>

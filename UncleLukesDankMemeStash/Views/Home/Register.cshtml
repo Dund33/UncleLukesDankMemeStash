@@ -8,45 +8,45 @@
 
 
 <body class="text-white">
-    <h1>Rejestracja</h1>
+<h1>Rejestracja</h1>
 
-    <form asp-action="Register">
-        <div class="form-group">
-            <label asp-for="UserName">Nazwa użytkownika</label>
-            <input asp-for="UserName" class="form-control" placeholder="login" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
+<form asp-action="Register">
+    <div class="form-group">
+        <label asp-for="UserName">Nazwa użytkownika</label>
+        <input asp-for="UserName" class="form-control" placeholder="login"/>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Password">Hasło</label>
-            <input asp-for="Password" class="form-control" placeholder="hasło" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
+    <div class="form-group">
+        <label asp-for="Password">Hasło</label>
+        <input asp-for="Password" class="form-control" placeholder="hasło"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="FirstName">Imię</label>
-            <input asp-for="FirstName" class="form-control" placeholder="Jan" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-        </div>
+    <div class="form-group">
+        <label asp-for="FirstName">Imię</label>
+        <input asp-for="FirstName" class="form-control" placeholder="Jan"/>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="LastName">Nazwisko</label>
-            <input asp-for="LastName" class="form-control" placeholder="Kowalski" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div>
+    <div class="form-group">
+        <label asp-for="LastName">Nazwisko</label>
+        <input asp-for="LastName" class="form-control" placeholder="Kowalski"/>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" placeholder="example@example.com" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="example@example.com"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
 
-        <input type="submit" class="btn btn-light" value="Zarejestruj" />
+    <input type="submit" class="btn btn-light" value="Zarejestruj"/>
 
-        @if (ViewBag.ErrorMessage != null)
-        {
-            <span class="text-danger">@ViewBag.ErrorMessage</span>
-        }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    }
 
-    </form>
+</form>
 </body>

@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using UncleLukesDankMemeStash.Data;
 
 namespace UncleLukesDankMemeStash
@@ -20,15 +12,14 @@ namespace UncleLukesDankMemeStash
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-             Host.CreateDefaultBuilder(args)
-        .ConfigureServices((context, services) =>
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
-        })
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        });
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
+                })
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        }
     }
 }

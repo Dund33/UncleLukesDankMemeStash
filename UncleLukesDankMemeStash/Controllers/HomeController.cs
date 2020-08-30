@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +14,8 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<MemeAuthor> loginManager, UserManager<MemeAuthor> userManager)
+        public HomeController(ILogger<HomeController> logger, SignInManager<MemeAuthor> loginManager,
+            UserManager<MemeAuthor> userManager)
         {
             _logger = logger;
             _loginManager = loginManager;
@@ -36,7 +33,7 @@ namespace UncleLukesDankMemeStash.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Register()
         {
             return View();
@@ -55,18 +52,14 @@ namespace UncleLukesDankMemeStash.Controllers
                 ViewBag.ErrorMessage = "Niepoprawne dane";
                 return View();
             }
+
             newUser.Admin = false;
             var result = await _userManager.CreateAsync(newUser, newUser.Password);
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                ViewBag.ErrorMessage = result.ToString();
-                return View();
-            }
+            if (result.Succeeded) return RedirectToAction("Login");
+
+            ViewBag.ErrorMessage = result.ToString();
+            return View();
         }
 
         public async Task<IActionResult> Logout()
@@ -89,20 +82,22 @@ namespace UncleLukesDankMemeStash.Controllers
                 return View();
             }
 
-            var result = await _loginManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
+            var result =
+                await _loginManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
 
             if (!result.Succeeded)
             {
                 ViewBag.ErrorMessage = "Nie zalogowano";
                 return View();
             }
+
             return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

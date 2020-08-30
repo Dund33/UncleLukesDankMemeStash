@@ -5,22 +5,22 @@
 
 
 <head>
-    <link rel="stylesheet" src="~/css/site.css" />
-    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" src="~/css/site.css"/>
+    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css"/>
 </head>
 
 <body>
-    <div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between fade-in">
-        <a class="text-center text-decoration-none text-white" asp-action="Details" asp-route-id="@Model.Displayable.ID">
-            <img class="rounded mx-auto d-block" style="width:100%; height:auto; max-height:6rem; object-fit:cover" src="@Model.Displayable.ImageURL" />
-            <h6 class="text-center text-white">@Model.Displayable.Title</h6>
-        </a>
-        @if (Model.CanEdit)
-        {
-            <div class="justify-content-between d-flex">
-                <a class="text-center text-decoration-none link-padding rounded" asp-action="Edit" asp-route-id="@Model.Displayable.ID">Edytuj</a>
-                <a class="text-center text-decoration-none link-padding rounded" asp-action="Delete" asp-route-id="@Model.Displayable.ID"> Usuń </a>
-            </div>
-        }
-    </div>
+<div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between fade-in">
+    <a class="text-center text-decoration-none text-white" asp-action="Details" asp-route-id="@Model.Displayable.ID">
+        <img class="rounded mx-auto d-block" style="height: auto; max-height: 6rem; object-fit: cover; width: 100%;" src="@Model.Displayable.ImageURL"/>
+        <h6 class="text-center text-white">@Model.Displayable.Title</h6>
+    </a>
+    @if (Model.CanEdit)
+    {
+        <div class="justify-content-between d-flex">
+            <a class="text-center text-decoration-none link-padding rounded" asp-action="Edit" asp-route-id="@Model.Displayable.ID">Edytuj</a>
+            <a class="text-center text-decoration-none link-padding rounded" asp-action="Delete" asp-route-id="@Model.Displayable.ID"> Usuń </a>
+        </div>
+    }
+</div>
 </body>
