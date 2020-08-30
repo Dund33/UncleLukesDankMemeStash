@@ -22,13 +22,7 @@
 
     @if (ViewBag.CanAdd)
     {
-        <div class="col-5 col-sm-3 col-lg-2">
-            <div>
-                <a class="text-center text-decoration-none link-padding rounded" asp-action="Create">
-                    <div>Dodaj</div>
-                </a>
-            </div>
-        </div>
+        @await Html.PartialAsync("_AddButton");
     }
 
 </div>
