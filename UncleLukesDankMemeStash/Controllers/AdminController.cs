@@ -24,11 +24,14 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-
+            var user = await GetUser();
+            ViewBag.User = user;
             if (!user.Admin) return View("NotAnAdmin");
 
             return View();
@@ -37,7 +40,8 @@ namespace UncleLukesDankMemeStash.Controllers
         [Authorize]
         public async Task<IActionResult> NonConfirmedUsers()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 
@@ -49,21 +53,23 @@ namespace UncleLukesDankMemeStash.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Confirm(string userID)
+        public async Task<IActionResult> Confirm(string id)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 
-            if (userID == null)
+            if (id == null)
                 return NotFound("Invalid ID");
 
             var matchingUser = await _context.Users
-                .Where(user => user.Id == userID)
+                .Where(user => user.Id == id)
                 .SingleAsync();
             matchingUser.EmailConfirmed = true;
             _context.SaveChanges();
-            return View("NonConfirmedUsers");
+
+            return RedirectToAction(nameof(NonConfirmedUsers));
         }
     }
 }

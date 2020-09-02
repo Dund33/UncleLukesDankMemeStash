@@ -30,11 +30,18 @@
 
         <a class="text-decoration-none" style="color: inherit" asp-controller="Categories" asp-action="Index">
             <li class="list-group-item btn-dark link" style="display: none">
-
                 Przeglądaj kategoriami
             </li>
         </a>
-
+        
+        @if (ViewBag.IsAdmin)
+        {
+            <a class="text-decoration-none" style="color: inherit" asp-controller="Admin" asp-action="Index">
+                <li class="list-group-item btn-dark link" style="display: none">
+                    Administracja
+                </li>
+            </a>
+        }
 
         @if (ViewBag.User != null)
         {

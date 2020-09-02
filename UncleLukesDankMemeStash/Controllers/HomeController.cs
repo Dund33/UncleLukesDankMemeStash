@@ -29,6 +29,7 @@ namespace UncleLukesDankMemeStash.Controllers
         {
             var user = await GetUser();
             ViewBag.User = user;
+            ViewBag.IsAdmin = user?.Admin ?? false;
             return View();
         }
 
