@@ -24,11 +24,16 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
         // GET: Categories
         public async Task<IActionResult> Index()
         {
             var categories = await _context.Category.ToListAsync();
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+
+            ViewBag.User = user;
             ViewBag.CanAdd = user?.Admin ?? false;
 
             var tileViewModels = categories.Select(category => new TileViewModel
@@ -44,9 +49,11 @@ namespace UncleLukesDankMemeStash.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-
+            var user = await GetUser();
             var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.ID == id);
+
+            ViewBag.User = user;
 
             if (category == null) return NotFound();
 
@@ -57,7 +64,8 @@ namespace UncleLukesDankMemeStash.Controllers
         [Authorize]
         public async Task<IActionResult> Create()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             return !user.Admin ? View("NotAnAdmin") : View();
         }
@@ -71,7 +79,9 @@ namespace UncleLukesDankMemeStash.Controllers
         public async Task<IActionResult> Create([Bind("ID,Title,Description,ImageURL")]
             Category category)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 
@@ -87,9 +97,10 @@ namespace UncleLukesDankMemeStash.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            var user = await GetUser();
+            ViewBag.User = user;
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (id == null) return NotFound();
 
             if (!user.Admin) return View("NotAnAdmin");
 
@@ -108,7 +119,8 @@ namespace UncleLukesDankMemeStash.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,ImageURL")]
             Category category)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 
@@ -135,7 +147,8 @@ namespace UncleLukesDankMemeStash.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 
@@ -156,7 +169,8 @@ namespace UncleLukesDankMemeStash.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
 

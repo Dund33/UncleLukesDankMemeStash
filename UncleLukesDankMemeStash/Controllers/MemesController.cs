@@ -26,6 +26,9 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
         private bool IsImage(string filename)
         {
             string[] imageFormats = {".jpg", ".jpeg", ".png", ".gif"};
@@ -68,14 +71,21 @@ namespace UncleLukesDankMemeStash.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (meme == null) return NotFound();
 
+            var user = await GetUser();
+            ViewBag.User = user;
+
             return View(meme);
         }
 
         // GET: Memes/Create
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID", "Title");
+
+            var user = await GetUser();
+            ViewBag.User = user;
+
             return View();
         }
 
@@ -88,7 +98,11 @@ namespace UncleLukesDankMemeStash.Controllers
         public async Task<IActionResult> Create([Bind("ID,Title,ImageURL,Comment,CategoryID")]
             Meme meme)
         {
-            meme.User = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+
+            ViewBag.User = user;
+            meme.User = user;
+
             if (ModelState.IsValid && IsImage(meme.ImageURL))
             {
                 _context.Add(meme);
@@ -110,10 +124,12 @@ namespace UncleLukesDankMemeStash.Controllers
             var meme = await _context.Memes.FindAsync(id);
             if (meme == null) return NotFound();
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
             if (meme.UserID != user.Id && !user.Admin) return View("NotAnOwner");
 
+            ViewBag.User = user;
             ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID", "Title", meme.CategoryID);
+
             return View(meme);
         }
 
@@ -126,7 +142,7 @@ namespace UncleLukesDankMemeStash.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ImageURL,Comment,CategoryID,UserID")]
             Meme meme)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
             var author = await _context.Memes.Where(m => m.ID == meme.ID).Select(m => m.User).FirstOrDefaultAsync();
 
             if (author.Id != user.Id && !user.Admin) return View("NotAnOwner");
@@ -151,6 +167,7 @@ namespace UncleLukesDankMemeStash.Controllers
             }
 
             ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID", "Title", meme.CategoryID);
+            ViewBag.User = user;
             return View(meme);
         }
 
@@ -166,7 +183,9 @@ namespace UncleLukesDankMemeStash.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (meme == null) return NotFound();
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
+            ViewBag.User = user;
+
             if (meme.UserID != user.Id && !user.Admin) return View("NotAnOwner");
 
             return View(meme);
@@ -181,11 +200,14 @@ namespace UncleLukesDankMemeStash.Controllers
         {
             var meme = await _context.Memes.FindAsync(id);
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
             if (meme.UserID != user.Id && !user.Admin) return View("NotAnOwner");
+
+            ViewBag.User = user;
 
             _context.Memes.Remove(meme);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -194,7 +216,7 @@ namespace UncleLukesDankMemeStash.Controllers
             return _context.Memes.Any(e => e.ID == id);
         }
 
-        private static int GetMatchingCharactersLen(Meme meme, string query)
+        private static int GetMatchingCharactersLen(IDisplayable meme, string query)
         {
             return Regex.Match(meme.Title, query, RegexOptions.IgnoreCase).Length;
         }
@@ -209,13 +231,16 @@ namespace UncleLukesDankMemeStash.Controllers
             var sortedMemes = memes
                 .OrderByDescending(meme => GetMatchingCharactersLen(meme, querySafe));
 
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentUser = await GetUser();
 
             var tileViewModels = sortedMemes.Select(meme => new TileViewModel
             {
                 Displayable = meme,
                 CanEdit = meme.User == currentUser || (currentUser?.Admin ?? false)
             });
+
+            ViewBag.User = currentUser;
+
             return View("Index", tileViewModels);
         }
     }

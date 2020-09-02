@@ -22,25 +22,34 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await GetUser();
             ViewBag.User = user;
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
+            var user = await GetUser();
+            ViewBag.User = user;
             return View();
         }
 
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
+            var user = await GetUser();
+            ViewBag.User = user;
             return View();
         }
 
-        public IActionResult NotLogggedIn()
+        public async Task<IActionResult> NotLogggedIn()
         {
+            var user = await GetUser();
+            ViewBag.User = user;
             return View();
         }
 
