@@ -1,5 +1,6 @@
 ﻿@model UncleLukesDankMemeStash.Areas.Identity.MemeAuthor
 
+<html>
 <head>
     <link rel="stylesheet" src="~/css/site.css"/>
     <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css"/>
@@ -10,7 +11,8 @@
     <h6 class="text-center text-white">@Model.FirstName @Model.LastName</h6>
 
     <div class="justify-content-center d-flex">
-        <a class="text-center text-decoration-none link-padding rounded" asp-action="Edit" asp-route-id="@Model.Id">Confirm</a>
+        <a class="text-center text-decoration-none link-padding rounded" asp-action="Confirm" asp-route-id="@Model.Id">Confirm</a>
     </div>
 </div>
 </body>
+</html>
