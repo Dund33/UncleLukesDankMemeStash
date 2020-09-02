@@ -24,9 +24,6 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
-        private Task<MemeAuthor> GetUser()
-            => _userManager.GetUserAsync(HttpContext.User);
-
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -71,5 +68,8 @@ namespace UncleLukesDankMemeStash.Controllers
 
             return RedirectToAction(nameof(NonConfirmedUsers));
         }
+
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
     }
 }

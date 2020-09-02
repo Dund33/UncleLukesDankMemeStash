@@ -26,15 +26,6 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
-        private Task<MemeAuthor> GetUser()
-            => _userManager.GetUserAsync(HttpContext.User);
-
-        private bool IsImage(string filename)
-        {
-            string[] imageFormats = {".jpg", ".jpeg", ".png", ".gif"};
-            return imageFormats.Any(filename.EndsWith);
-        }
-
         // GET: Memes
         public async Task<IActionResult> Index(int? category = null)
         {
@@ -242,6 +233,15 @@ namespace UncleLukesDankMemeStash.Controllers
             ViewBag.User = currentUser;
 
             return View("Index", tileViewModels);
+        }
+
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
+        private static bool IsImage(string filename)
+        {
+            string[] imageFormats = { ".jpg", ".jpeg", ".png", ".gif" };
+            return imageFormats.Any(filename.EndsWith);
         }
     }
 }

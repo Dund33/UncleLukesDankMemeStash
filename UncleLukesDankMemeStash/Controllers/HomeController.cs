@@ -22,9 +22,6 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
-        private Task<MemeAuthor> GetUser()
-            => _userManager.GetUserAsync(HttpContext.User);
-
         public async Task<IActionResult> Index()
         {
             var user = await GetUser();
@@ -109,5 +106,9 @@ namespace UncleLukesDankMemeStash.Controllers
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
+
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
+
     }
 }

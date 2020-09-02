@@ -24,9 +24,6 @@ namespace UncleLukesDankMemeStash.Controllers
             _userManager = userManager;
         }
 
-        private Task<MemeAuthor> GetUser()
-            => _userManager.GetUserAsync(HttpContext.User);
-
         // GET: Categories
         public async Task<IActionResult> Index()
         {
@@ -180,6 +177,9 @@ namespace UncleLukesDankMemeStash.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        private Task<MemeAuthor> GetUser()
+            => _userManager.GetUserAsync(HttpContext.User);
 
         private bool CategoryExists(int id)
         {
