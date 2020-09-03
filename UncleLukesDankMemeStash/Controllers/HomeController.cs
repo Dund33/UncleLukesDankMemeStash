@@ -14,7 +14,8 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<MemeAuthor> loginManager,
+        public HomeController(ILogger<HomeController> logger,
+            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _logger = logger;

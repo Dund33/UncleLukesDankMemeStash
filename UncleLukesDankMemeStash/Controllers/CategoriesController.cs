@@ -16,7 +16,8 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
-        public CategoriesController(ApplicationDbContext context, SignInManager<MemeAuthor> loginManager,
+        public CategoriesController(ApplicationDbContext context,
+            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _context = context;

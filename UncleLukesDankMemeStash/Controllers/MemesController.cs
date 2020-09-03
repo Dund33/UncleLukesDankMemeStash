@@ -18,7 +18,8 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
-        public MemesController(ApplicationDbContext context, SignInManager<MemeAuthor> loginManager,
+        public MemesController(ApplicationDbContext context,
+            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _context = context;
@@ -202,16 +203,6 @@ namespace UncleLukesDankMemeStash.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MemeExists(int id)
-        {
-            return _context.Memes.Any(e => e.ID == id);
-        }
-
-        private static int GetMatchingCharactersLen(IDisplayable meme, string query)
-        {
-            return Regex.Match(meme.Title, query, RegexOptions.IgnoreCase).Length;
-        }
-
         [HttpGet]
         public async Task<IActionResult> Search(string query)
         {
@@ -219,6 +210,7 @@ namespace UncleLukesDankMemeStash.Controllers
             var memes = await _context.Memes
                 .Include(m => m.User)
                 .ToListAsync();
+
             var sortedMemes = memes
                 .OrderByDescending(meme => GetMatchingCharactersLen(meme, querySafe));
 
@@ -233,6 +225,16 @@ namespace UncleLukesDankMemeStash.Controllers
             ViewBag.User = currentUser;
 
             return View("Index", tileViewModels);
+        }
+
+        private bool MemeExists(int id)
+        {
+            return _context.Memes.Any(e => e.ID == id);
+        }
+
+        private static int GetMatchingCharactersLen(IDisplayable meme, string query)
+        {
+            return Regex.Match(meme.Title, query, RegexOptions.IgnoreCase).Length;
         }
 
         private Task<MemeAuthor> GetUser()

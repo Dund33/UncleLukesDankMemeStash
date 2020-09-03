@@ -1,0 +1,16 @@
+﻿@model IEnumerable<UncleLukesDankMemeStash.Models.UserDTO> 
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="get" action="FindUserByName">
+    <input name="name" type="text"/>
+    <input type="submit" value="Szukaj"/>
+</form>
+
+@foreach(var user in Model)
+{
+    @await Html.PartialAsync("_UserEditDeleteTile", user);
+}
