@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using UncleLukesDankMemeStash.Areas.Identity;
 using UncleLukesDankMemeStash.Data;
 using UncleLukesDankMemeStash.Models;
+using System;
 
 namespace UncleLukesDankMemeStash.Controllers
 {
@@ -17,7 +18,7 @@ namespace UncleLukesDankMemeStash.Controllers
         private readonly ApplicationDbContext _context;
         private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
-
+        //private readonly ILogger<AdminController> _logger;
         private const int UsersToDisplay = 10;
 
         public AdminController(ApplicationDbContext context,
@@ -27,6 +28,7 @@ namespace UncleLukesDankMemeStash.Controllers
             _context = context;
             _loginManager = loginManager;
             _userManager = userManager;
+            //_logger = logger;
         }
 
         [Authorize]
@@ -40,6 +42,7 @@ namespace UncleLukesDankMemeStash.Controllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> NonConfirmedUsers()
         {
             var user = await GetUser();
@@ -55,6 +58,7 @@ namespace UncleLukesDankMemeStash.Controllers
 
         [Authorize]
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm(string id)
         {
             var user = await GetUser();
@@ -75,6 +79,8 @@ namespace UncleLukesDankMemeStash.Controllers
         }
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> FindUserByName(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -95,6 +101,64 @@ namespace UncleLukesDankMemeStash.Controllers
             });
 
             return View(userDTOs);
+        }
+
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Details(string Id)
+        {
+            var user = await GetUser();
+
+            if (!user.Admin)
+                return View("NotAnAdmin");
+
+            if (string.IsNullOrEmpty(Id))
+                return NotFound();
+
+            var foundUser = await _userManager.FindByIdAsync(Id);
+
+            return View(foundUser);
+        }
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> SetPassword(string Id)
+        {
+            Console.WriteLine(Id);
+            var user = await GetUser();
+            if (!user.Admin)
+                return View("NotAnAdmin");
+
+            var foundUser = await _userManager.FindByIdAsync(Id);
+
+            return View(foundUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> SetPassword([Bind]string Id, [Bind]string password1, [Bind]string password2)
+        {
+            Console.WriteLine(password1);
+            Console.WriteLine(password2);
+            var user = await GetUser();
+            if (!user.Admin)
+                return View("NotAnAdmin");
+           
+            var foundUser = await _userManager.FindByIdAsync(Id);
+
+            if (password1 != password2)
+            {
+                ViewBag.Success = false;
+                return View(foundUser);
+            }
+
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
+            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, password1);
+
+            ViewBag.Success = passwordChangeResult.Succeeded;
+            return View(foundUser);
         }
 
         private static int GetMatchingCharactersLen(MemeAuthor user, string query)
