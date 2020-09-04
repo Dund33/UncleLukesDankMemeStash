@@ -42,7 +42,6 @@ namespace UncleLukesDankMemeStash.Controllers
         }
 
         [Authorize]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> NonConfirmedUsers()
         {
             var user = await GetUser();
@@ -58,7 +57,6 @@ namespace UncleLukesDankMemeStash.Controllers
 
         [Authorize]
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm(string id)
         {
             var user = await GetUser();
