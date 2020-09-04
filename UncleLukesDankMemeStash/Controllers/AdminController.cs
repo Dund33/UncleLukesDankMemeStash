@@ -79,7 +79,6 @@ namespace UncleLukesDankMemeStash.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> FindUserByName(string name)
         {
@@ -103,7 +102,6 @@ namespace UncleLukesDankMemeStash.Controllers
             return View(userDTOs);
         }
 
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> Details(string Id)
         {
@@ -121,7 +119,6 @@ namespace UncleLukesDankMemeStash.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> SetPassword(string Id)
         {
@@ -138,24 +135,22 @@ namespace UncleLukesDankMemeStash.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> SetPassword([Bind]string Id, [Bind]string password1, [Bind]string password2)
+        public async Task<IActionResult> SetPassword([Bind]string Id, [Bind]string Password, [Bind]string PasswordConf)
         {
-            Console.WriteLine(password1);
-            Console.WriteLine(password2);
             var user = await GetUser();
             if (!user.Admin)
                 return View("NotAnAdmin");
            
             var foundUser = await _userManager.FindByIdAsync(Id);
 
-            if (password1 != password2)
+            if (Password != PasswordConf)
             {
                 ViewBag.Success = false;
                 return View(foundUser);
             }
 
             string resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
-            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, password1);
+            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, Password);
 
             ViewBag.Success = passwordChangeResult.Succeeded;
             return View(foundUser);
