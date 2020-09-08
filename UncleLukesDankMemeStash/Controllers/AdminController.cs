@@ -16,17 +16,14 @@ namespace UncleLukesDankMemeStash.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
         //private readonly ILogger<AdminController> _logger;
         private const int UsersToDisplay = 10;
 
         public AdminController(ApplicationDbContext context,
-            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _context = context;
-            _loginManager = loginManager;
             _userManager = userManager;
             //_logger = logger;
         }
