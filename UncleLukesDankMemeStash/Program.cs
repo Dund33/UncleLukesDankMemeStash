@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using UncleLukesDankMemeStash.Data;
 
 namespace UncleLukesDankMemeStash
@@ -15,6 +16,11 @@ namespace UncleLukesDankMemeStash
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddScoped<ApplicationDbContext, ApplicationDbContext>();

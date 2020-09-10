@@ -13,15 +13,12 @@ namespace UncleLukesDankMemeStash.Controllers
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
         public CategoriesController(ApplicationDbContext context,
-            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _context = context;
-            _loginManager = loginManager;
             _userManager = userManager;
         }
 
@@ -143,6 +140,7 @@ namespace UncleLukesDankMemeStash.Controllers
 
         // GET: Categories/Delete/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             var user = await GetUser();

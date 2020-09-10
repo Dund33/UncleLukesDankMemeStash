@@ -45,13 +45,14 @@ namespace UncleLukesDankMemeStash.Controllers
             return View();
         }
 
-        public async Task<IActionResult> NotLogggedIn()
+        public async Task<IActionResult> NotLoggedIn()
         {
             var user = await GetUser();
             ViewBag.User = user;
-            return View();
+            return View("NotLoggedIn");
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel newUser)
         {
@@ -76,8 +77,9 @@ namespace UncleLukesDankMemeStash.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            TempData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -90,16 +92,21 @@ namespace UncleLukesDankMemeStash.Controllers
                 return View();
             }
 
+            var returnUrl = TempData["ReturnUrl"] as string;
+            _logger.LogError(returnUrl);
+
             var result =
                 await _loginManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
 
-            if (!result.Succeeded)
-            {
-                ViewBag.ErrorMessage = "Nie zalogowano";
-                return View();
-            }
+            if(string.IsNullOrEmpty(returnUrl))
+                returnUrl = "/";
 
-            return RedirectToAction("Index", "Home");
+            if (result.Succeeded) 
+                return Redirect(returnUrl);
+
+            ViewBag.ErrorMessage = "Nie zalogowano";
+            return View();
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

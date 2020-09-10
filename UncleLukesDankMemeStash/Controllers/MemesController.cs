@@ -15,15 +15,12 @@ namespace UncleLukesDankMemeStash.Controllers
     public class MemesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<MemeAuthor> _loginManager;
         private readonly UserManager<MemeAuthor> _userManager;
 
         public MemesController(ApplicationDbContext context,
-            SignInManager<MemeAuthor> loginManager,
             UserManager<MemeAuthor> userManager)
         {
             _context = context;
-            _loginManager = loginManager;
             _userManager = userManager;
         }
 
