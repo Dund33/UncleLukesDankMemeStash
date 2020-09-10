@@ -52,6 +52,7 @@ namespace UncleLukesDankMemeStash.Controllers
             return View("NotLoggedIn");
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel newUser)
         {
@@ -96,6 +97,9 @@ namespace UncleLukesDankMemeStash.Controllers
 
             var result =
                 await _loginManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
+
+            if(string.IsNullOrEmpty(returnUrl))
+                returnUrl = "/";
 
             if (result.Succeeded) 
                 return Redirect(returnUrl);

@@ -140,6 +140,7 @@ namespace UncleLukesDankMemeStash.Controllers
 
         // GET: Categories/Delete/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             var user = await GetUser();

@@ -27,7 +27,6 @@
     @foreach (var tileViewModel in Model)
     {
         @await Html.PartialAsync("_EditDeleteTile", tileViewModel)
-        ;
     }
-    @await Html.PartialAsync("_AddButton");
+    @await Html.PartialAsync("_AddButton")
 </div>
