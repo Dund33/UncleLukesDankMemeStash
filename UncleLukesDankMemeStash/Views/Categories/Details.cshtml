@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Category</h4>
+    <h4 class="text-white">Kategoria</h4>
     <hr/>
     <dl class="row text-white">
         <dt class="col-sm-2">
@@ -25,6 +25,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> |
-    <a asp-action="Index">Wróć do listy</a>
+    <a class="link-padding rounded" asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> 
+    <text class="text-white">|</text>
+    <a class="link-padding rounded" asp-action="Index">Wróć do listy</a>
 </div>

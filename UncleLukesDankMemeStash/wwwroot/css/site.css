@@ -73,7 +73,7 @@ body {
 .gallery-item {
     -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
-    background-color: #424242;
+    background-color: #282828;
     border-left: thin darkgray solid;
     border-radius: 15px;
     border-right: thin darkgray solid;
@@ -86,13 +86,13 @@ body {
 .link {
     background-color: transparent;
     color: white;
-    display: block;
+    display: inline-block;
 }
 
 .link-padding {
     background-color: transparent;
     color: white;
-    display: block;
+    display: inline-block;
     padding: .5rem 1rem;
 }
 
@@ -102,7 +102,7 @@ body {
     -webkit-transition: all 0.5s ease-in-out;
     background-color: #fff;
     color: black;
-    display: block;
+    display: inline-block;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
 }
@@ -113,7 +113,7 @@ body {
     -webkit-transition: all 0.5s ease-in-out;
     background-color: #fff;
     color: black;
-    display: block;
+    display: inline-block;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
 }
