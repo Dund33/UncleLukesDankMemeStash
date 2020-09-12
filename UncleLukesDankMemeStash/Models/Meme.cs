@@ -23,8 +23,8 @@ namespace UncleLukesDankMemeStash.Models
 
         [Key] public int ID { get; set; }
 
-        [Required] [DisplayName("Tytuł")] public string Title { get; set; }
+        [Required(ErrorMessage = "Tytuł mema jest wymagany")] [DisplayName("Tytuł")] public string Title { get; set; }
 
-        [Required] [Url] public string ImageURL { get; set; }
+        [Required(ErrorMessage = "URL obrazka jest wymagany")] [Url] public string ImageURL { get; set; }
     }
 }
