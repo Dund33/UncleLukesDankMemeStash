@@ -1,15 +1,17 @@
-﻿@model Category
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Category
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"];
 }
 
 
-<h1>Details</h1>
+<h1>@Localizer["Details"]</h1>
 
 <div>
-    <h4 class="text-white">Kategoria</h4>
-    <hr/>
+    <h4 class="text-white">@Localizer["Category"]</h4>
+    <hr />
     <dl class="row text-white">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
@@ -26,7 +28,7 @@
     </dl>
 </div>
 <div class="text-white">
-    <a class="link-padding rounded" asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> 
+    <a class="link-padding rounded" asp-action="Edit" asp-route-id="@Model.ID">@Localizer["Edit"]</a>
     |
-    <a class="link-padding rounded" asp-action="Index">Wróć do listy</a>
+    <a class="link-padding rounded" asp-action="Index">@Localizer["Go back to list"]</a>
 </div>

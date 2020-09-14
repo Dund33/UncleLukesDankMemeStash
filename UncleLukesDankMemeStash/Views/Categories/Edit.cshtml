@@ -1,13 +1,15 @@
-﻿@model UncleLukesDankMemeStash.Models.Category
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Category
 
 @{
-    ViewData["Title"] = "Edytuj";
+    ViewData["Title"] = Localizer["Edit"];
 }
 
-<h1 class="text-white">Edit</h1>
+<h1 class="text-white">@Localizer["Edit"]</h1>
 
-<h4 class="text-white">Category</h4>
-<hr/>
+<h4 class="text-white">@Localizer["Category"]</h4>
+<hr />
 <div class="row">
     <div class="col-md-4 text-white">
         <form asp-action="Edit">
@@ -29,14 +31,14 @@
                 <span asp-validation-for="ImageURL" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="link-padding rounded">Wróć do listy</a>
+    <a asp-action="Index" class="link-padding rounded">@Localizer["Go back to list"]</a>
 </div>
 
 @section Scripts {
