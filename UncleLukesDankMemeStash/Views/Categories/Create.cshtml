@@ -7,22 +7,22 @@
 <h1 class="text-white">Create</h1>
 
 <hr/>
-<div class="row">
+<div class="row text-white">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label text-white"></label>
+                <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label text-white"></label>
+                <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control"/>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageURL" class="control-label text-white"></label>
+                <label asp-for="ImageURL" class="control-label"></label>
                 <input asp-for="ImageURL" class="form-control"/>
                 <span asp-validation-for="ImageURL"></span>
             </div>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="col-2">
-    <a asp-action="Index" class="link rounded text-center">Wróć do listy</a>
+    <a asp-action="Index" class="link-padding rounded text-center">Wróć do listy</a>
 </div>
 
 @section Scripts {

@@ -6,11 +6,11 @@
 
 <h1>Szczegóły</h1>
 
-<div>
+<div class="text-white">
     <h4>@Html.DisplayFor(model => model.Title)</h4>
     <img class="img-fluid" src="@Model.ImageURL"/>
     <hr/>
-    <dl class="row text-white">
+    <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageURL)
         </dt>
@@ -37,7 +37,8 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> |
+<div class="text-white">
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> 
+    |
     <a asp-action="Index">Wróć do listy</a>
 </div>
