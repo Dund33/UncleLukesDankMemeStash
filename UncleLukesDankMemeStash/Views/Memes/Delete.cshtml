@@ -1,15 +1,17 @@
-﻿@model Meme
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Meme
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = Localizer["Delete"];
 }
 
-<h1 class="text-white">Usuwanie</h1>
+<h1 class="text-white">@Localizer["Delete"]</h1>
 
-<h3 class="text-white">Czy na pewno chcesz usunąć mema?</h3>
+<h3 class="text-white">@Localizer["Are you sure?"]</h3>
 <div class="text-white">
     <h4 class="text-white">Meme</h4>
-    <hr/>
+    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageURL)
@@ -38,8 +40,8 @@
     </dl>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID"/>
-        <input type="submit" value="Delete" class="btn btn-danger rounded"/> |
-        <a asp-action="Index" class="link-padding rounded">Wróć</a>
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger rounded" /> |
+        <a asp-action="Index" class="link-padding rounded">@Localizer["Go back to the list"]</a>
     </form>
 </div>

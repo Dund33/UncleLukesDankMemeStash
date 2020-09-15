@@ -1,27 +1,29 @@
-﻿@model IEnumerable<TileViewModel>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IEnumerable<TileViewModel>
 
 @{
-    ViewData["Title"] = "Memy";
+    ViewData["Title"] = Localizer["Memes"];
 }
 
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/BrowseEnter.js"></script>
-    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" src="~/css/site.css"/>
+    <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" src="~/css/site.css" />
 </head>
 
 <div class="navbar container-fluid d-flex">
-    <div class="col-6 col-lg-8 col-xl-8 text-right text-white">Szukaj po nazwie</div>
+    <div class="col-6 col-lg-8 col-xl-8 text-right text-white">@Localizer["Find by name"]</div>
     <div class="col-6 col-lg-4 col-xl-4">
         <form method="get" asp-action="Search">
-            <input name="query" id="query" type="text"/>
-            <input type="submit" value="Szukaj"/>
+            <input name="query" id="query" type="text" />
+            <input type="submit" value="@Localizer["Find"]" />
         </form>
     </div>
 </div>
 
-<h1 class="text-white">Przeglądanie memów</h1>
+<h1 class="text-white">@Localizer["Browse memes"]</h1>
 
 <div class="row">
     @foreach (var tileViewModel in Model)

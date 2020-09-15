@@ -7,24 +7,32 @@ namespace UncleLukesDankMemeStash.Models
 {
     public class Meme : IDisplayable
     {
-        [DisplayName("Komentarz")] public string Comment { get; set; }
+        [Display(Name = "Comment")] 
+        public string Comment { get; set; }
 
-        [DisplayName("ID Kategorii")]
+        [Display(Name = "Category")]
         [ForeignKey("Category")]
         public int CategoryID { get; set; }
 
-        [DisplayName("Kategoria")] public Category Category { get; set; }
+        [Display(Name = "Category")] 
+        public Category Category { get; set; }
 
-        [DisplayName("Użytkownik")]
+        [Display(Name = "User")]
         [ForeignKey("MemeAuthor")]
         public string UserID { get; set; }
 
-        [DisplayName("Użytkownik")] public MemeAuthor User { get; set; }
+        [Display(Name = "User")] 
+        public MemeAuthor User { get; set; }
 
-        [Key] public int ID { get; set; }
+        [Key] 
+        public int ID { get; set; }
 
-        [Required(ErrorMessage = "Tytuł mema jest wymagany")] [DisplayName("Tytuł")] public string Title { get; set; }
+        [Required(ErrorMessage = "Meme title is required")] 
+        [Display( Name = "Title")] 
+        public string Title { get; set; }
 
-        [Required(ErrorMessage = "URL obrazka jest wymagany")] [Url] public string ImageURL { get; set; }
+        [Required(ErrorMessage = "Image URL is required")]
+        [Url] 
+        public string ImageURL { get; set; }
     }
 }

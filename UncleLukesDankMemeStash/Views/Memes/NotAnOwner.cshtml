@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "NotAnOwner";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Not an owner"];
 }
 
-<h1>NotAnOwner</h1>
+<h1>@Localizer["Not an owner"]</h1>

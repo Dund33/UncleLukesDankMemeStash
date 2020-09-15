@@ -1,15 +1,17 @@
-﻿@model Meme
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Meme
 
 @{
-    ViewData["Title"] = "Szczegóły";
+    ViewData["Title"] = Localizer["Details"];
 }
 
-<h1>Szczegóły</h1>
+<h1>@Localizer["Details"]</h1>
 
 <div class="text-white">
     <h4>@Html.DisplayFor(model => model.Title)</h4>
-    <img class="img-fluid" src="@Model.ImageURL"/>
-    <hr/>
+    <img class="img-fluid" src="@Model.ImageURL" />
+    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageURL)
@@ -38,7 +40,7 @@
     </dl>
 </div>
 <div class="text-white">
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edytuj</a> 
+    <a asp-action="Edit" asp-route-id="@Model.ID">@Localizer["Edit"]</a>
     |
-    <a asp-action="Index">Wróć do listy</a>
+    <a asp-action="Index">@Localizer["Go back to the list"]</a>
 </div>

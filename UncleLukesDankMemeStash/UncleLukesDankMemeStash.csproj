@@ -69,7 +69,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Category.pl.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 
