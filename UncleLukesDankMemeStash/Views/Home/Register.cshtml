@@ -1,59 +1,61 @@
-﻿@model RegisterModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = Localizer["Registration"];
 }
 <head>
-      <script src="~/js/PasswordEqualityVerifier.js"></script>
+    <script src="~/js/PasswordEqualityVerifier.js"></script>
 </head>
 
 
 <body class="text-white">
-<h1>Rejestracja</h1>
+    <h1>@Localizer["Registration"]</h1>
 
-<form asp-action="Register">
-    <div class="form-group">
-        <label asp-for="UserName">Nazwa użytkownika</label>
-        <input asp-for="UserName" class="form-control" placeholder="login" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
-    </div>
+    <form asp-action="Register">
+        <div class="form-group">
+            <label asp-for="UserName">@Localizer["Username"]</label>
+            <input asp-for="UserName" class="form-control" placeholder="@Localizer["Username"]" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Password">Hasło</label>
-        <input asp-for="Password" class="form-control" placeholder="hasło" oninput="checkEq()" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Password">@Localizer["Password"]</label>
+            <input asp-for="Password" class="form-control" placeholder="@Localizer["Password"]" oninput="checkEq()" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <input type="password" id="PasswordConf" name="PasswordConf" class="form-control" placeholder="potwierdź hasło" oninput="checkEq()" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <input type="password" id="PasswordConf" name="PasswordConf" class="form-control" placeholder="@Localizer["Confirm password"]" oninput="checkEq()" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="FirstName">Imię</label>
-        <input asp-for="FirstName" class="form-control" placeholder="Jan" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="FirstName">@Localizer["First name"]</label>
+            <input asp-for="FirstName" class="form-control" placeholder="@Localizer["John"]" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="LastName">Nazwisko</label>
-        <input asp-for="LastName" class="form-control" placeholder="Kowalski" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="LastName">@Localizer["Last name"]</label>
+            <input asp-for="LastName" class="form-control" placeholder="@Localizer["Doe"]" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" class="form-control" placeholder="example@example.com" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" placeholder="example@example.com" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <input id="submit" type="submit" class="btn btn-light" value="Zarejestruj" />
+        <input id="submit" type="submit" class="btn btn-light" value="Zarejestruj" />
 
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <span class="text-danger">@ViewBag.ErrorMessage</span>
-    }
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+        }
 
-</form>
+    </form>
     <div id="error" name="error" class="text-danger">
     </div>
 </body>

@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Home page"];
 }
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -12,33 +14,33 @@
         {
             <a class="text-decoration-none" style="color: inherit" asp-action="Login">
                 <li class="list-group-item btn-dark link" style="display: none">
-                    Zaloguj
+                    @Localizer["Log in"]
                 </li>
             </a>
             <a class="text-decoration-none" style="color: inherit" asp-action="Register">
                 <li class="list-group-item btn-dark link" style="display: none">
-                    Zarejestruj
+                    @Localizer["Register"]
                 </li>
             </a>
         }
 
         <a class="text-decoration-none" style="color: inherit" asp-controller="Memes" asp-action="Index">
             <li class="list-group-item btn-dark link" style="display: none">
-                Przeglądaj memy
+                @Localizer["Browse all"]
             </li>
         </a>
 
         <a class="text-decoration-none" style="color: inherit" asp-controller="Categories" asp-action="Index">
             <li class="list-group-item btn-dark link" style="display: none">
-                Przeglądaj kategoriami
+                @Localizer["Browse categories"]
             </li>
         </a>
-        
+
         @if (ViewBag.IsAdmin)
         {
             <a class="text-decoration-none" style="color: inherit" asp-controller="Admin" asp-action="Index">
                 <li class="list-group-item btn-dark link" style="display: none">
-                    Administracja
+                    @Localizer["Administration"]
                 </li>
             </a>
         }
@@ -47,7 +49,7 @@
         {
             <a class="text-decoration-none" style="color: inherit" asp-controller="Memes" asp-action="Create">
                 <li class="list-group-item btn-dark link" style="display: none">
-                    Dodaj mema
+                    @Localizer["Add meme"]
                 </li>
             </a>
         }
