@@ -1,5 +1,4 @@
-﻿using System;
-namespace UncleLukesDankMemeStash.Models
+﻿namespace UncleLukesDankMemeStash.Models
 {
     public class UserDTO
     {

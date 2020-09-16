@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using UncleLukesDankMemeStash.Areas.Identity;
 using UncleLukesDankMemeStash.Models;
 
@@ -98,10 +98,10 @@ namespace UncleLukesDankMemeStash.Controllers
             var result =
                 await _loginManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
 
-            if(string.IsNullOrEmpty(returnUrl))
+            if (string.IsNullOrEmpty(returnUrl))
                 returnUrl = "/";
 
-            if (result.Succeeded) 
+            if (result.Succeeded)
                 return Redirect(returnUrl);
 
             ViewBag.ErrorMessage = "Nie zalogowano";
@@ -112,7 +112,7 @@ namespace UncleLukesDankMemeStash.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         private Task<MemeAuthor> GetUser()

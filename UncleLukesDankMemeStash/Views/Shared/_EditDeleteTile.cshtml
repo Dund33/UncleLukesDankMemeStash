@@ -11,10 +11,10 @@
     <link rel="stylesheet" src="~/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
 
-<body>
-    <div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between fade-in">
+<body class="fade-in">
+    <div class="col-5 col-sm-3 col-lg-2 gallery-item d-flex flex-column justify-content-between">
         <a class="text-center text-decoration-none text-white" asp-action="Details" asp-route-id="@Model.Displayable.ID">
-            <img class="rounded mx-auto d-block" style="height: auto; max-height: 6rem; object-fit: cover; width: 100%;" src="@Model.Displayable.ImageURL" />
+            <img class="rounded mx-auto d-block" style="height: auto; max-height: 6rem; object-fit: cover; width: 100%;" src="@Model.Displayable.ImageURL" alt="@Model.Displayable.Title"/>
             <h6 class="text-center text-white">@Model.Displayable.Title</h6>
         </a>
         @if (Model.CanEdit)
