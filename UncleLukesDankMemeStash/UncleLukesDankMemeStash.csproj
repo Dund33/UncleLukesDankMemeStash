@@ -67,4 +67,10 @@
     <Resource Include="wwwroot\add-btn.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Category.pl.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

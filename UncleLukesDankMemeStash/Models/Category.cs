@@ -5,12 +5,19 @@ namespace UncleLukesDankMemeStash.Models
 {
     public class Category : IDisplayable
     {
-        [DisplayName("Opis")] public string Description { get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
 
-        [Key] public int ID { get; set; }
+        [Key]
+        public int ID { get; set; }
 
-        [Required(ErrorMessage = "Nazwa ketegorii jest wymagana")] [DisplayName("Kategoria")] public string Title { get; set; }
+        [Required(ErrorMessage = "Category name is required")]
+        [Display(Name = "Category")]
+        [Localizable(true)]
+        public string Title { get; set; }
 
-        [Required(ErrorMessage = "URL obrazka jest wymagany")] [Url] public string ImageURL { get; set; }
+        [Required(ErrorMessage = "Image URL is required")]
+        [Url]
+        public string ImageURL { get; set; }
     }
 }

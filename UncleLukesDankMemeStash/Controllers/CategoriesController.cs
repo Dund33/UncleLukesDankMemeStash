@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using UncleLukesDankMemeStash.Areas.Identity;
 using UncleLukesDankMemeStash.Data;
 using UncleLukesDankMemeStash.Models;
@@ -111,15 +111,13 @@ namespace UncleLukesDankMemeStash.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,ImageURL")]
+        public async Task<IActionResult> Edit([Bind("ID,Title,Description,ImageURL")]
             Category category)
         {
             var user = await GetUser();
             ViewBag.User = user;
 
             if (!user.Admin) return View("NotAnAdmin");
-
-            if (id != category.ID) return NotFound();
 
             if (!ModelState.IsValid)
                 return View(category);
@@ -140,7 +138,6 @@ namespace UncleLukesDankMemeStash.Controllers
 
         // GET: Categories/Delete/5
         [Authorize]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             var user = await GetUser();

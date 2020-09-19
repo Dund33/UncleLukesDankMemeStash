@@ -1,17 +1,19 @@
-﻿@model IEnumerable<TileViewModel>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IEnumerable<TileViewModel>
 
 @{
-    ViewData["Title"] = "Kategorie";
+    ViewData["Title"] = Localizer["Categories"];
 }
 
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/BrowseEnter.js"></script>
-    <link rel="stylesheet" src="~/css/site.css"/>
+    <link rel="stylesheet" src="~/css/site.css" />
 </head>
 
 
-<h1 class="text-white">Kategorie</h1>
+<h1 class="text-white">@Localizer["Categories"]</h1>
 
 <div class="row">
 

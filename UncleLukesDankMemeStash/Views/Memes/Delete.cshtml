@@ -1,45 +1,47 @@
-﻿@model Meme
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Meme
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = Localizer["Delete"];
 }
 
-<h1 class="text-white">Usuwanie</h1>
+<h1 class="text-white">@Localizer["Delete"]</h1>
 
-<h3>Czy na pewno chcesz usunąć mema?</h3>
-<div>
+<h3 class="text-white">@Localizer["Are you sure?"]</h3>
+<div class="text-white">
     <h4 class="text-white">Meme</h4>
-    <hr/>
+    <hr />
     <dl class="row">
-        <dt class="col-sm-2 text-white">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageURL)
         </dt>
-        <dd class="col-sm-10 text-white">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ImageURL)
         </dd>
-        <dt class="col-sm-2 text-white">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Comment)
         </dt>
-        <dd class="col-sm-10 text-white">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Comment)
         </dd>
-        <dt class="col-sm-2 text-white">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
         </dt>
-        <dd class="col-sm-10 text-white">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Category.Title)
         </dd>
-        <dt class="col-sm-2 text-white">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.User)
         </dt>
-        <dd class="col-sm-10 text-white">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.User.Id)
         </dd>
     </dl>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/> |
-        <a asp-action="Index" class="link">Wróć</a>
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger rounded" /> |
+        <a asp-action="Index" class="link-padding rounded">@Localizer["Go back to the list"]</a>
     </form>
 </div>

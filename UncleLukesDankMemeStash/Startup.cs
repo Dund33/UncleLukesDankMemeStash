@@ -1,11 +1,12 @@
-using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using UncleLukesDankMemeStash.Areas.Identity;
 using UncleLukesDankMemeStash.Data;
 
@@ -29,7 +30,11 @@ namespace UncleLukesDankMemeStash
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages()
-                .AddRazorRuntimeCompilation();
+                .AddRazorRuntimeCompilation()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Home/Denied";
@@ -58,6 +63,14 @@ namespace UncleLukesDankMemeStash
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            var supportedCultures = new[] { "en-US", "pl" };
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture("pl")
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

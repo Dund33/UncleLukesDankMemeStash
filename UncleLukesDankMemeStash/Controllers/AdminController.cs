@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using UncleLukesDankMemeStash.Areas.Identity;
 using UncleLukesDankMemeStash.Data;
 using UncleLukesDankMemeStash.Models;
-using System;
 
 namespace UncleLukesDankMemeStash.Controllers
 {
@@ -130,12 +130,12 @@ namespace UncleLukesDankMemeStash.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> SetPassword([Bind]string Id, [Bind]string Password, [Bind]string PasswordConf)
+        public async Task<IActionResult> SetPassword([Bind] string Id, [Bind] string Password, [Bind] string PasswordConf)
         {
             var user = await GetUser();
             if (!user.Admin)
                 return View("NotAnAdmin");
-           
+
             var foundUser = await _userManager.FindByIdAsync(Id);
 
             if (Password != PasswordConf)
@@ -144,8 +144,8 @@ namespace UncleLukesDankMemeStash.Controllers
                 return View(foundUser);
             }
 
-            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
-            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, Password);
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
+            var passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, Password);
 
             ViewBag.Success = passwordChangeResult.Succeeded;
             return View(foundUser);
