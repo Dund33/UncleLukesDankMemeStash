@@ -144,8 +144,8 @@ namespace UncleLukesDankMemeStash.Controllers
                 return View(foundUser);
             }
 
-            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
-            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, Password);
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(foundUser);
+            var passwordChangeResult = await _userManager.ResetPasswordAsync(foundUser, resetToken, Password);
 
             ViewBag.Success = passwordChangeResult.Succeeded;
             return View(foundUser);
