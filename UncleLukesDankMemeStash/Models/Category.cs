@@ -1,18 +1,19 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using UncleLukesDankMemeStash.Resources;
 
 namespace UncleLukesDankMemeStash.Models
 {
     public class Category : IDisplayable
     {
-        [Display(Name = "Description")]
+        [Display(Name = "Description", ResourceType = typeof(CategoryLocalization))]
         public string Description { get; set; }
 
         [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Category name is required")]
-        [Display(Name = "Category")]
+        [Display(Name = "Title", ResourceType = typeof(CategoryLocalization))]
         [Localizable(true)]
         public string Title { get; set; }
 

@@ -29,6 +29,16 @@
       <DependentUpon>MemeLocalization.pl.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="Resources\CategoryLocalization.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CategoryLocalization.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\CategoryLocalization.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CategoryLocalization.pl.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -80,6 +90,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\MemeLocalization.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CategoryLocalization.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoryLocalization.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CategoryLocalization.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
