@@ -39,6 +39,11 @@
       <DependentUpon>CategoryLocalization.pl.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="Resources\Views.Shared._Layout.pl.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Views.Shared._Layout.pl.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -99,6 +104,11 @@
     <EmbeddedResource Update="Resources\CategoryLocalization.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views.Shared._Layout.pl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Views.Shared._Layout.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Remove="Resources\Views.Shared._Layout.resx" />
   </ItemGroup>
 
 </Project>
