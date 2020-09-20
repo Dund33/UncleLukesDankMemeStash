@@ -24,6 +24,11 @@
     <Compile Remove="Migrations\20200513124550_New initial migration.Designer.cs" />
     <Compile Remove="Migrations\20200824210113_renamed.cs" />
     <Compile Remove="Migrations\20200824210113_renamed.Designer.cs" />
+    <Compile Update="Resources\MemeLocalization.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MemeLocalization.pl.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +75,12 @@
   <ItemGroup>
     <EmbeddedResource Update="Resources\Category.pl.resx">
       <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MemeLocalization.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MemeLocalization.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
